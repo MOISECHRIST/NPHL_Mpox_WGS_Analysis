@@ -2,7 +2,9 @@
 This script aims to help Cameroon NPHL's Bioinformatic Team in Mpox WGS data analysis in characterisation and tracking this outbreak.
 ## Usage 
 
-### Launch nf-core/Viralrecon 
+### Launch nf-core/Viralrecon
+
+If you want to identify circulating strains and build a consensus for downstream analyses.
 
 ```{bash}
 bash run_nf_core_viralrecon.sh </path/to/datadir> </path/to/outdir> \
@@ -11,6 +13,9 @@ bash run_nf_core_viralrecon.sh </path/to/datadir> </path/to/outdir> \
 ```
 
 ## Launch Introduction Analysis (Phylodynamic)
+
+To trace the origins of the strains circulating in your country.
+
 ```{bash}
 bash run_phylogenetic_tree.sh </path/to/sequences.fasta> </path/to/reference_genome.fasta> \
                              </path/to/date_file.(csv|tsv)> </path/to/location_file.(csv|tsv)> \
