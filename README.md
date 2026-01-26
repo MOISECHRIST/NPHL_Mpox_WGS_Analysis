@@ -17,6 +17,7 @@ This repository hosts bioinformatics scripts designed to support the National Pu
 │   └── run_phylogenetic_tree.sh
 ├── README.md
 └── viralrecon_MPOX => Wrapper for the nf-core/viralrecon pipeline (assembly & consensus).
+    ├── run_nextclade.sh
     └── run_nf_core_viralrecon.sh
 ```
 
