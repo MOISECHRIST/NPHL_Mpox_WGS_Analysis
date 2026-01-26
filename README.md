@@ -27,7 +27,7 @@ R2_EXT='_R2_001.fastq.gz'
 
 ### Phylogeography 
 
-#### REQUIREMENTS
+#### Requirements 
 
 ``` bash
 cd phylogeography
