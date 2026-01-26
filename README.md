@@ -1,5 +1,6 @@
 # NPHL Mpox WGS Analysis
 This script aims to help Cameroon NPHL's Bioinformatic Team in Mpox WGS data analysis in characterisation and tracking this outbreak.
+
 ## Usage 
 
 ### Launch nf-core/Viralrecon
@@ -7,6 +8,9 @@ This script aims to help Cameroon NPHL's Bioinformatic Team in Mpox WGS data ana
 If you want to identify circulating strains and build a consensus for downstream analyses.
 
 ``` bash
+#Move into the viralrecon_MPOX directory
+cd viralrecon_MPOX
+
 #Launch the script 
 bash run_nf_core_viralrecon.sh </path/to/datadir> </path/to/outdir> \
                                  <0 = Use built-in REFSEQ_ID, 1 = Provide custom FASTA/GFF (default=0)> \
@@ -21,18 +25,23 @@ R1_EXT='_R1_001.fastq.gz'
 R2_EXT='_R2_001.fastq.gz'
 ```
 
-## Launch Introduction Analysis (Phylodynamic)
+## Phylogeography 
 
-To trace the origins of the strains circulating in your country.
-
-**REQUIREMENTS :**
+### REQUIREMENTS
 
 ``` bash
 cd phylogeography
 conda env create -f environment.yml
 ```
 
+### Launch Introduction Analysis
+
+To trace the origins of the strains circulating in your country.
+
 ``` bash
+#Move into the phylogeography directory
+cd phylogeography
+
 #Activate the environment 
 conda activate phylodynamic
 
@@ -42,7 +51,7 @@ bash run_phylogenetic_tree.sh </path/to/sequences.fasta> </path/to/reference_gen
                              <time of last sampled tip eg : 2025-05-03> </path/to/outdir>
 ```
 
-## Plot Migrations on a Map 
+### Plot Migrations on a Map 
 
 ``` bash
 #Activate the environment 
