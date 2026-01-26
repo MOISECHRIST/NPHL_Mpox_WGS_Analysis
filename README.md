@@ -108,7 +108,7 @@ python phylogeography/final_DataViz.py \
       --migration <OUTDIR>/mugration/mugration_results.csv \
       --pointsGeoloc <path/to/gps_coordinates.csv>
 
-#See script usage
+#Script usage
 python final_DataViz.py -h
 ```
 
