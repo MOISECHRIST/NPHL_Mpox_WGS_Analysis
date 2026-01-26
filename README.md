@@ -70,7 +70,7 @@ R2_EXT='_R2_001.fastq.gz'
 
 ### 2. Clade Assignment and Quality Checks
 
-Use this step to identify clades and check the quality of sequences using nextclade.
+Use this step to identify clades and assess sequence quality using Nextclade.
 
 ```bash
 #Ensure environment is active 
