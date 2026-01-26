@@ -43,6 +43,7 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
                                        'EventTime', and coordinate columns.
         origins (str or list, optional): Filter for origin locations. Defaults to None.
         destinations (str or list, optional): Filter for destination locations. Defaults to None.
+        save (bool): To save the plot in pdf
 
     Returns:
         None: Displays the plot and saves it as a PDF.
@@ -150,14 +151,14 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
 
     title_parts = ["Outbreak Introduction"]
     if origins:
-        title_parts.append(f"FROM {', '.join(origins)}")
+        title_parts.append(f"from {', '.join(origins)}")
     else:
-        title_parts.append("FROM All")
+        title_parts.append("from all")
         
     if destinations:
-        title_parts.append(f"TO {', '.join(destinations)}")
+        title_parts.append(f"to {', '.join(destinations)}")
     else:
-        title_parts.append("TO All")
+        title_parts.append("to all")
 
     full_title = " ".join(title_parts)
 
