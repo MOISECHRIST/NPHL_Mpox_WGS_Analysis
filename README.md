@@ -6,12 +6,12 @@ This repository hosts bioinformatics scripts designed to support the National Pu
 
 ```bash
 .
+├── environment.yml
 ├── LICENSE
 ├── phylogeography => Scripts for phylogenetic analysis, molecular dating, and migration plotting.
 │   ├── AncestralChanges.py
 │   ├── baltic.py
 │   ├── compute_float_date.sh
-│   ├── environment.yml
 │   ├── final_DataViz.py
 │   ├── Plot_migrations.py
 │   └── run_phylogenetic_tree.sh
@@ -22,7 +22,7 @@ This repository hosts bioinformatics scripts designed to support the National Pu
 
 ## Installation & Requirements
 
-### 1. nf-core/Viralrecon Environment
+### 1. nf-core/viralrecon
 
 Ensure you have [Nextflow](https://www.nextflow.io/docs/latest/install.html) installed
 
@@ -30,12 +30,12 @@ Ensure you have [Nextflow](https://www.nextflow.io/docs/latest/install.html) ins
 nextflow pull nf-core/viralrecon -r 2.6.0
 ```
 
-### 2. Phylogeography Environment
+### 2. Clade assignment, quality checks and phylogeography
 
 Ensure you have [Conda](https://docs.conda.io/en/latest/) installed.
 
 ``` bash
-conda env create -f phylogeography/environment.yml
+conda env create -f environment.yml
 ```
 
 ## Usage
@@ -68,7 +68,24 @@ R1_EXT='_R1_001.fastq.gz'
 R2_EXT='_R2_001.fastq.gz'
 ```
 
-### 2. Phylogeography Analysis
+### 2. Clade Assignment and Quality Checks
+
+Use this step to identify clades and check the quality of sequences using nextclade.
+
+```bash
+#Ensure environment is active 
+conda activate phylodynamic
+
+#Run the analysis pipeline
+bash viralrecon_MPOX/run_nextclade.sh <Sequences> <Output Directory>
+```
+
+**Parameters:**
+
+* **Sequences:** Path to the FASTA file with all samples sequences.
+* **Output Directory:** Path to a Output Directory.
+
+### 3. Phylogeography Analysis
 
 This module performs alignment, phylogeny (IQ-TREE), and molecular dating (TreeTime).
 
@@ -83,7 +100,7 @@ bash phylogeography/run_phylogenetic_tree.sh \
       <Date File> \
       <Locations File> \
       <Last Sample Date> \
-      <output_directory>
+      <Output Directory>
 ```
 
 **Parameters:**
@@ -95,7 +112,7 @@ bash phylogeography/run_phylogenetic_tree.sh \
 * **Last Sample Date:** The date of the last sample in the tree with the format `YYYY-MM-DD`
 * **Output Directory:** Path to a Output Directory.
 
-### 3. Visualization (Migration Plots)
+### 4. Visualization (Migration Plots)
 
 Visualize viral introductions and migration events based on the phylogeographic analysis.
 
