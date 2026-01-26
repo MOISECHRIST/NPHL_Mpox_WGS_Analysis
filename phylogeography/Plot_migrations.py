@@ -132,6 +132,14 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
             cmin=min_year,
             cmax=max_year,
             colorbar=dict(
+                orientation='h',
+                y=-0.1,
+                x=0.5,
+                xanchor='center',    
+                yanchor='top', 
+                len=0.6,             
+                thickness=15,        
+                title_side='top',
                 title="Year", 
                 tickmode="array", 
                 tickvals=list(range(min_year, max_year + 1)), 
@@ -140,7 +148,7 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
         )
     ))
 
-    title_parts = ["Cameroon Outbreak Introduction"]
+    title_parts = ["Outbreak Introduction"]
     if origins:
         title_parts.append(f"FROM {', '.join(origins)}")
     else:
