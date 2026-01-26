@@ -25,7 +25,7 @@ This repository hosts bioinformatics scripts designed to support the National Pu
 
 ### 1. nf-core/viralrecon
 
-Ensure you have [Nextflow](https://www.nextflow.io/docs/latest/install.html) installed
+Ensure you have [Nextflow](https://www.nextflow.io/docs/latest/install.html) and [Docker](https://docs.docker.com/engine/install/) installed
 
 ```bash
 nextflow pull nf-core/viralrecon -r 2.6.0
