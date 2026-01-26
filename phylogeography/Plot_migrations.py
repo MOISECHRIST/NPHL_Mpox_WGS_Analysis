@@ -33,7 +33,7 @@ def get_bezier_curve(lon1, lat1, lon2, lat2, curvature=0.2, num_points=30):
     
     return curve_lon, curve_lat
 
-def plot_general_migration(locations_data, migration_data, origins=None, destinations=None):
+def plot_general_migration(locations_data, migration_data, origins=None, destinations=None, save=True):
     """
     Generates and saves a geographical plot of migration paths.
 
@@ -117,7 +117,7 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
                     width = 2,
                     color = line_color 
                 ),
-                opacity = 0.7, 
+                opacity = float(target_data['EventTime'][i])/float(target_data['EventTime'].max()), 
                 hoverinfo = 'text',    
                 text = tooltip_text,   
                 showlegend = False 
@@ -133,7 +133,7 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
             cmax=max_year,
             colorbar=dict(
                 orientation='h',
-                y=-0.1,
+                y=-0.01,
                 x=0.5,
                 xanchor='center',    
                 yanchor='top', 
@@ -179,15 +179,16 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
         )
     )
 
-    filename_parts = ["Migration_Map"]
-    if origins:
-        filename_parts.append(f"From_{'-'.join(origins)}")
-    if destinations:
-        filename_parts.append(f"To_{'-'.join(destinations)}")
-    
-    safe_filename = "_".join(filename_parts) + ".pdf"
-    
-    print(f"Output file path : {safe_filename}")
-    fig.write_image(safe_filename, width=1200, height=800)
+    if save:
+        filename_parts = ["Migration_Map"]
+        if origins:
+            filename_parts.append(f"From_{'-'.join(origins)}")
+        if destinations:
+            filename_parts.append(f"To_{'-'.join(destinations)}")
+        
+        safe_filename = "_".join(filename_parts) + ".pdf"
+        
+        print(f"Output file path : {safe_filename}")
+        fig.write_image(safe_filename, width=1200, height=800)
     
     fig.show()

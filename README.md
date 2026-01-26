@@ -124,7 +124,7 @@ conda activate phylodynamic
 #Run the visualization script
 python phylogeography/final_DataViz.py \
       --migration <OUTDIR>/mugration/mugration_results.csv \
-      --pointsGeoloc <path/to/gps_coordinates.csv>
+      --pointsGeoloc <path/to/gps_coordinates.csv> --savepdf
 
 #Script usage
 python phylogeography/final_DataViz.py -h
@@ -136,3 +136,4 @@ python phylogeography/final_DataViz.py -h
 * `--pointsGeoloc`: Path to a CSV with columns: `location`, `long`, `lat`.
 * `--origins` (Optional): Filter by origin location (e.g., `--origins South Center`).
 * `--destinations` (Optional): Filter by destination (e.g., `--destinations North-West Littoral East`).
+* `--savepdf` (Optional): To save plot in pdf file
