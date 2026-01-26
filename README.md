@@ -1,6 +1,7 @@
 # NPHL Mpox WGS Analysis
 
-This repository contains scripts to assist the **Cameroon NPHL Bioinformatic Team** in analyzing Mpox WGS data for outbreak tracking and characterization.
+This repository contains scripts to assist the **Cameroon NPHL Bioinformatic Team** in analyzing Mpox WGS data for outbreak tracking and characterization.\
+With the aim of supporting my colleagues at the National Public Health Laboratory of Cameroon, I created this GitHub repository. It contains code to assist their Mpox genomic surveillance efforts, which began following the identification of 5 confirmed cases in the Littoral (4) and South-West (1) regions.
 
 ## Project Structure
 
