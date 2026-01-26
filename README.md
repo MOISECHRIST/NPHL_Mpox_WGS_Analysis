@@ -17,6 +17,7 @@ This repository hosts bioinformatics scripts designed to support the National Pu
 │   └── run_phylogenetic_tree.sh
 ├── README.md
 └── viralrecon_MPOX => Wrapper for the nf-core/viralrecon pipeline (assembly & consensus).
+    ├── run_nextclade.sh
     └── run_nf_core_viralrecon.sh
 ```
 
@@ -24,7 +25,7 @@ This repository hosts bioinformatics scripts designed to support the National Pu
 
 ### 1. nf-core/viralrecon
 
-Ensure you have [Nextflow](https://www.nextflow.io/docs/latest/install.html) installed
+Ensure you have [Nextflow](https://www.nextflow.io/docs/latest/install.html) and [Docker](https://docs.docker.com/engine/install/) installed
 
 ```bash
 nextflow pull nf-core/viralrecon -r 2.6.0
@@ -70,7 +71,7 @@ R2_EXT='_R2_001.fastq.gz'
 
 ### 2. Clade Assignment and Quality Checks
 
-Use this step to identify clades and check the quality of sequences using nextclade.
+Use this step to identify clades and assess sequence quality using Nextclade.
 
 ```bash
 #Ensure environment is active 
