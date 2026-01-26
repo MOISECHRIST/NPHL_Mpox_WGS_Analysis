@@ -6,7 +6,7 @@ This script aims to help Cameroon NPHL's Bioinformatic Team in Mpox WGS data ana
 
 If you want to identify circulating strains and build a consensus for downstream analyses.
 
-```(bash)
+``` bash
 #Launch the script 
 bash run_nf_core_viralrecon.sh </path/to/datadir> </path/to/outdir> \
                                  <0 = Use built-in REFSEQ_ID, 1 = Provide custom FASTA/GFF (default=0)> \
@@ -16,7 +16,7 @@ bash run_nf_core_viralrecon.sh </path/to/datadir> </path/to/outdir> \
 **NOTE :**\
 These two lines in `run_nf_core_viralrecon.sh` should be modified if your FASTQ files use different extensions.
 
-```(bash)
+``` bash
 R1_EXT='_R1_001.fastq.gz'
 R2_EXT='_R2_001.fastq.gz'
 ```
@@ -27,12 +27,12 @@ To trace the origins of the strains circulating in your country.
 
 **REQUIREMENTS :**
 
-```(bash)
+``` bash
 cd phylogeography
 conda env create -f environment.yml
 ```
 
-```{bash}
+``` bash
 #Activate the environment 
 conda activate phylodynamic
 
@@ -44,7 +44,7 @@ bash run_phylogenetic_tree.sh </path/to/sequences.fasta> </path/to/reference_gen
 
 ## Plot Migrations on a Map 
 
-```(bash)
+``` bash
 #Activate the environment 
 conda activate phylodynamic
 
