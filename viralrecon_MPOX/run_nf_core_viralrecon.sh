@@ -1,12 +1,12 @@
 #!/bin/bash 
 
-##-------------------------------------------
-##
-##  NC_063383.1, Clade IIb, Nigeria 08-2018
-##  ON563414.3,  Clade IIb, USA 05-2022
-##  MT903344.1,  Clade IIb, United Kingdom 
-##
-##-------------------------------------------
+##----------------------------------------------------------------------------
+##  DQ011155.1,  Clade I,        Zaire (Democratic Republic of the Congo) 1979
+##  NC_063383.1, Clade IIb,      Nigeria 08-2018
+##  ON563414.3,  Clade IIb,      USA 05-2022
+##  MT903344.1,  Clade IIb,      United Kingdom 
+##  NC_063383.1 (with B.1 SNPs)
+##-----------------------------------------------------------------------------
 
 # USAGE :
 ## bash run_nf_core_viralrecon.sh </path/to/datadir> </path/to/outdir> \
