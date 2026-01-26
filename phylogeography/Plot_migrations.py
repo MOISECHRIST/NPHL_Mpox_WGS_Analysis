@@ -158,7 +158,7 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
         height = 800, 
         margin = dict(l=0, r=0, t=40, b=0),
         geo = dict(
-            scope = 'africa',
+            scope = 'world',
             resolution = 50, 
             showcountries = True,
             countrycolor = "rgb(150, 150, 150)",
@@ -166,8 +166,6 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
             landcolor = "rgb(240, 240, 240)",
             showocean = True,
             oceancolor = "rgb(200, 225, 255)", 
-            lonaxis = dict( range = [8, 16.5] ),
-            lataxis = dict( range = [1.5, 13.5] ),
             showframe = False,
             showcoastlines = True,
         )
