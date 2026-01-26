@@ -109,7 +109,7 @@ python phylogeography/final_DataViz.py \
       --pointsGeoloc <path/to/gps_coordinates.csv>
 
 #Script usage
-python final_DataViz.py -h
+python phylogeography/final_DataViz.py -h
 ```
 
 **Arguments for `final_DataViz.py`:**
