@@ -1,78 +1,120 @@
 # NPHL Mpox WGS Analysis
-This script aims to help Cameroon NPHL's Bioinformatic Team in Mpox WGS data analysis in characterisation and tracking this outbreak.
 
-## Usage 
+This repository contains scripts to assist the **Cameroon NPHL Bioinformatic Team** in analyzing Mpox WGS data for outbreak tracking and characterization.
 
-### Launch nf-core/Viralrecon
+## Project Structure
 
-If you want to identify circulating strains and build a consensus for downstream analyses.
-
-``` bash
-#Move into the viralrecon_MPOX directory
-cd viralrecon_MPOX
-
-#Launch the script 
-bash run_nf_core_viralrecon.sh </path/to/datadir> </path/to/outdir> \
-                                 <0 = Use built-in REFSEQ_ID, 1 = Provide custom FASTA/GFF (default=0)> \
-                                </path/to/reference.fasta (only if the third parameter=1)> </path/to/reference.gff (only if the third parameter=1)>
+```bash
+.
+├── LICENSE
+├── phylogeography => Scripts for phylogenetic analysis, molecular dating, and migration plotting.
+│   ├── AncestralChanges.py
+│   ├── baltic.py
+│   ├── compute_float_date.sh
+│   ├── environment.yml
+│   ├── final_DataViz.py
+│   ├── Plot_migrations.py
+│   └── run_phylogenetic_tree.sh
+├── README.md
+└── viralrecon_MPOX => Wrapper for the nf-core/viralrecon pipeline (assembly & consensus).
+    └── run_nf_core_viralrecon.sh
 ```
 
+## Installation & Requirements
+
+### 1. nf-core/Viralrecon Environment
+
+Ensure you have [Nextflow](https://www.nextflow.io/docs/latest/install.html) installed
+
+```bash
+nextflow pull nf-core/viralrecon -r 2.6.0
+```
+
+### 2. Phylogeography Environment
+
+Ensure you have [Conda](https://docs.conda.io/en/latest/) installed.
+
+``` bash
+conda env create -f phylogeography/environment.yml
+```
+
+## Usage
+
+### 1. Launch nf-core/Viralrecon
+
+Use this step to identify circulating strains and build consensus sequences from raw reads.
+
+``` bash
+#Launch the script 
+bash viralrecon_MPOX/run_nf_core_viralrecon.sh <DATA_DIR> <OUT_DIR> <MODE> [REF_FASTA] [REF_GFF]
+```
+
+ **Parameters:**
+
+* `DATA_DIR`: Path to folder containing FASTQ files (required).
+* `OUT_DIR`: Path where results will be saved (required).
+* `MODE`:
+  * `0` = Use built-in reference (NC_063383.1).
+  * `1` = Provide custom FASTA/GFF (requires 4th and 5th arguments).
+  * Default=`0`.
+* `REF_FASTA` : Path to the reference `.fasta` file.
+* `REF_GFF` : Path to the reference `.gff` file.
+
 **NOTE :**\
-These two lines in `run_nf_core_viralrecon.sh` should be modified if your FASTQ files use different extensions.
+Check `viralrecon_MPOX/run_nf_core_viralrecon.sh` lines 39-40 to ensure `R1_EXT` and `R2_EXT` match your `.fastq` file file extensions. Default values are :
 
 ``` bash
 R1_EXT='_R1_001.fastq.gz'
 R2_EXT='_R2_001.fastq.gz'
 ```
 
-### Phylogeography 
+### 2. Phylogeography Analysis
 
-#### Requirements 
-
-``` bash
-cd phylogeography
-conda env create -f environment.yml
-```
-
-#### Launch Introduction Analysis
-
-To trace the origins of the strains circulating in your country.
+This module performs alignment, phylogeny (IQ-TREE), and molecular dating (TreeTime).
 
 ``` bash
-#Move into the phylogeography directory
-cd phylogeography
-
-#Activate the environment 
+#Ensure environment is active 
 conda activate phylodynamic
 
-#Launch the script
-bash run_phylogenetic_tree.sh </path/to/sequences.fasta> </path/to/reference_genome.fasta> \
-                             </path/to/date_file.(csv|tsv)> </path/to/location_file.(csv|tsv)> \
-                             <time of last sampled tip eg : 2025-05-03> </path/to/outdir>
+#Run the analysis pipeline
+bash phylogeography/run_phylogenetic_tree.sh \
+      <Sequences> \
+      <Reference Genome> \
+      <Date File> \
+      <Locations File> \
+      <Last Sample Date> \
+      <output_directory>
 ```
 
-#### Plot Migrations on a Map 
+**Parameters:**
+
+* **Sequences:** Path to the FASTA file with all samples sequences.
+* **Reference Genome:** Path to the reference genome in FASTA format.
+* **Date File:** Path to a CSV/TSV file with columns: `name`, `date` (YYYY-MM-DD).
+* **Location File:** Path to a CSV/TSV file with columns: `name`, `country`.
+* **Last Sample Date:** The date of the last sample in the tree with the format `YYYY-MM-DD`
+* **Output Directory:** Path to a Output Directory.
+
+### 3. Visualization (Migration Plots)
+
+Visualize viral introductions and migration events based on the phylogeographic analysis.
 
 ``` bash
-#Activate the environment 
+#Ensure environment is active
 conda activate phylodynamic
 
-#final_DataViz.py Usage
+#Run the visualization script
+python phylogeography/final_DataViz.py \
+      --migration <OUTDIR>/mugration/mugration_results.csv \
+      --pointsGeoloc <path/to/gps_coordinates.csv>
+
+#See script usage
 python final_DataViz.py -h
-
-usage: final_DataViz.py [-h] --migration MIGRATION --pointsGeoloc POINTSGEOLOC [--origins ORIGINS [ORIGINS ...]] [--destinations DESTINATIONS [DESTINATIONS ...]]
-
-final_DataViz.py : This script allow user to vizualise the introductions found with AncestralChanges.py script.
-
-options:
-  -h, --help            show this help message and exit
-  --migration MIGRATION, -m MIGRATION
-                        Path to the AncestralChanges.py result csv file. Filewith columns : 'Origin', 'Destination','EventTime'
-  --pointsGeoloc POINTSGEOLOC, -p POINTSGEOLOC
-                        path to the csv file containing the geolication of each location in AncestralChanges.py result csv file. File with columns : 'location', 'long', and 'lat'.
-  --origins ORIGINS [ORIGINS ...], -o ORIGINS [ORIGINS ...]
-                        Optional list of origin locations separated by white space to filter the plot (e.g., --origins South Center).
-  --destinations DESTINATIONS [DESTINATIONS ...], -d DESTINATIONS [DESTINATIONS ...]
-                        Optional list of destination locations separated by white space to filter the plot (e.g., --destinations Center North-West).
 ```
 
+**Arguments for `final_DataViz.py`:**
+
+* `--migration`: Path to `mugration_results.csv` generated by the phylogeography step.
+* `--pointsGeoloc`: Path to a CSV with columns: `location`, `long`, `lat`.
+* `--origins` (Optional): Filter by origin location (e.g., `--origins South Center`).
+* `--destinations` (Optional): Filter by destination (e.g., `--destinations North-West Littoral East`).
