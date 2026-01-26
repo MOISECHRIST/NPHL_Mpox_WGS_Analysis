@@ -5,7 +5,7 @@
 ##  NC_063383.1, Clade IIb,      Nigeria 08-2018
 ##  ON563414.3,  Clade IIb,      USA 05-2022
 ##  MT903344.1,  Clade IIb,      United Kingdom 
-##  NC_063383.1 (with B.1 SNPs)
+##  NC_063383.1 (with B.1 SNPs), lineage-b.1
 ##-----------------------------------------------------------------------------
 
 # USAGE :
