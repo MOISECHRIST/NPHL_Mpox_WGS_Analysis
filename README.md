@@ -25,16 +25,16 @@ R1_EXT='_R1_001.fastq.gz'
 R2_EXT='_R2_001.fastq.gz'
 ```
 
-## Phylogeography 
+### Phylogeography 
 
-### REQUIREMENTS
+#### REQUIREMENTS
 
 ``` bash
 cd phylogeography
 conda env create -f environment.yml
 ```
 
-### Launch Introduction Analysis
+#### Launch Introduction Analysis
 
 To trace the origins of the strains circulating in your country.
 
@@ -51,7 +51,7 @@ bash run_phylogenetic_tree.sh </path/to/sequences.fasta> </path/to/reference_gen
                              <time of last sampled tip eg : 2025-05-03> </path/to/outdir>
 ```
 
-### Plot Migrations on a Map 
+#### Plot Migrations on a Map 
 
 ``` bash
 #Activate the environment 
