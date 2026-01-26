@@ -181,7 +181,7 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
     
     safe_filename = "_".join(filename_parts) + ".pdf"
     
-    print(f"Sauvegarde de l'image dans : {safe_filename}")
+    print(f"Output file path : {safe_filename}")
     fig.write_image(safe_filename, width=1200, height=800)
     
     fig.show()
