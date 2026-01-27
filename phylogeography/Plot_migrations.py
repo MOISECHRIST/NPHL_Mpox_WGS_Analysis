@@ -33,7 +33,7 @@ def get_bezier_curve(lon1, lat1, lon2, lat2, curvature=0.2, num_points=30):
     
     return curve_lon, curve_lat
 
-def plot_general_migration(locations_data, migration_data, origins=None, destinations=None, save=True):
+def plot_general_migration(locations_data, migration_data, origins=None, destinations=None, save=False):
     """
     Generates and saves a geographical plot of migration paths.
 
@@ -192,4 +192,4 @@ def plot_general_migration(locations_data, migration_data, origins=None, destina
         print(f"Output file path : {safe_filename}")
         fig.write_image(safe_filename, width=1200, height=800)
     
-    fig.show()
+    return fig

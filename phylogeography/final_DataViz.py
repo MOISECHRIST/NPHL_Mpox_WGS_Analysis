@@ -1,5 +1,6 @@
 import pandas as pd
 from Plot_migrations import plot_general_migration
+from dash import Dash, dcc, html, Input, Output
 
 import argparse
 import sys
@@ -42,9 +43,9 @@ if not required_geoloc_cols.issubset(location_geoloc.columns):
 def map_locations(location, locations_set=location_geoloc,long=True):
     if location in pd.unique(locations_set["location"]):
         if long:
-            return float(locations_set[locations_set["location"]==location]["long"])
+            return float(locations_set[locations_set["location"]==location]["long"].astype(float))
         else :
-            return float(locations_set[locations_set["location"]==location]["lat"])
+            return float(locations_set[locations_set["location"]==location]["lat"].astype(float))
     else : 
         return None 
 
@@ -57,4 +58,56 @@ df_migration["Destination_lat"]=df_migration["Destination"].map(lambda x : map_l
 df_migration_clean = df_migration[df_migration["Origin"]!='UNKNOWN']
 df_migration_clean = df_migration_clean[df_migration_clean["Destination"]!='UNKNOWN']
 
-plot_general_migration(location_geoloc, df_migration_clean, origins=selected_origins, destinations=selected_destinations, save=savepdf)
+all_destinations = pd.unique(df_migration_clean["Destination"])
+all_origins = pd.unique(df_migration_clean["Origin"])
+
+all_destinations = list(pd.unique(df_migration_clean["Destination"]))
+all_origins = list(pd.unique(df_migration_clean["Origin"]))
+
+app = Dash(__name__)
+
+app.layout = html.Div([
+    html.H1("Interactive Migration Map", style={'textAlign': 'center'}),
+    
+    html.Div([
+        html.Label("Origin locations :"),
+        dcc.Dropdown(
+            options=all_origins,
+            value=all_origins, # Par défaut, tout est sélectionné
+            id='selected_origins',
+            multi=True
+        ),
+    ], style={'padding': 5}),
+
+    html.Div([
+        html.Label("Destination locations :"),
+        dcc.Dropdown(
+            options=all_destinations,
+            value=all_destinations,
+            id="selected_destinations",
+            multi=True
+        ),
+    ], style={'padding': 10}),
+
+    dcc.Graph(id="graph", style={'height': '800px'})
+])
+
+@app.callback(
+    Output("graph", "figure"),
+    Input("selected_origins", "value"),
+    Input("selected_destinations", "value")
+)
+def update_chart(origins_list, destinations_list):
+    if not origins_list or not destinations_list:
+        return {} 
+
+    fig = plot_general_migration(
+        location_geoloc, 
+        df_migration_clean, 
+        origins=origins_list, 
+        destinations=destinations_list,
+        save=savepdf
+    )
+    return fig
+
+app.run()

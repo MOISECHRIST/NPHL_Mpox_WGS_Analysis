@@ -14,5 +14,6 @@ dependencies:
   - pip:
     - phylo-treetime=0.11.4
     - plotly=5.24.1
+    - dash=3.4.0
     - pandas
     - numpy

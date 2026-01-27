@@ -1,3 +1,5 @@
 phylogeography/__pycache__
 .DS_Store 
 tests_data
+phylogeography/.ipynb_checkpoints/
+.ipynb_checkpoints/

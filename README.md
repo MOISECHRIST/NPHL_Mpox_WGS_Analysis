@@ -126,6 +126,9 @@ python phylogeography/final_DataViz.py \
       --migration <OUTDIR>/mugration/mugration_results.csv \
       --pointsGeoloc <path/to/gps_coordinates.csv> --savepdf
 
+#The results is a Dash web page accessible on http://<ip_address>:8050
+## Eg : In a local PC http://127.0.0.1:8050/
+
 #Script usage
 python phylogeography/final_DataViz.py -h
 ```
