@@ -59,20 +59,21 @@ else
 fi
 
 #Make sure fastq_dir_to_samplesheet.py is present in the working directory
-if [ ! -f fastq_dir_to_samplesheet.py ]; then 
+if [ ! -f "$OUTDIR/fastq_dir_to_samplesheet.py" ]; then 
     wget -L https://raw.githubusercontent.com/nf-core/viralrecon/master/bin/fastq_dir_to_samplesheet.py
     chmod u+x fastq_dir_to_samplesheet.py
+    mv fastq_dir_to_samplesheet.py "$OUTDIR/."
 fi
 
 #Build a sample sheet
-./fastq_dir_to_samplesheet.py \
+python "$OUTDIR"/fastq_dir_to_samplesheet.py \
     --read1_extension $R1_EXT \
     --read2_extension $R2_EXT \
-    $DATADIR $SAMPLE_SHEET
+    "$DATADIR" "${OUTDIR}/${SAMPLE_SHEET}"
 
 #Launch nf-core/viralrecon on samples
 nextflow run nf-core/viralrecon -r 2.6.0 -profile docker \
-    --input $SAMPLE_SHEET \
+    --input "${OUTDIR}/${SAMPLE_SHEET}" \
     --outdir $OUTDIR \
     --platform illumina \
     --protocol metagenomic \
