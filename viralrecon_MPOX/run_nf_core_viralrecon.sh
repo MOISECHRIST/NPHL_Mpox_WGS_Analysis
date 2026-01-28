@@ -24,7 +24,7 @@ fi
 # Input Arguments
 DATADIR=$1
 OUTDIR=$2
-if [ -z "$3"]; then 
+if [ -z "$3" ]; then 
     INPUT_REFSEQ=0
 else 
     INPUT_REFSEQ=$3 # 0 = Use built-in REFSEQ_ID, 1 = Provide custom FASTA/GFF
@@ -45,7 +45,7 @@ mkdir -p "$OUTDIR"
 if [ $INPUT_REFSEQ == "0" ]; then 
     echo "Using pre-configured genome: $REFSEQ_ID"
     PARAMETERS="--genome  $REFSEQ_ID"
-elif [ $INPUT_REFSEQ == "1" ]
+elif [ $INPUT_REFSEQ == "1" ]; then
     echo "Using custom reference files."
     if [ -f "$REFSEQ_FASTA" ] && [ -f "$REFSEQ_GFF" ]; then
         PARAMETERS="--fasta $REFSEQ_FASTA --gff $REFSEQ_GFF"
@@ -58,15 +58,10 @@ else
     exit 1
 fi
 
-#Make sure fastq_dir_to_samplesheet.py is present in the working directory
-if [ ! -f "$OUTDIR/fastq_dir_to_samplesheet.py" ]; then 
-    wget -L https://raw.githubusercontent.com/nf-core/viralrecon/master/bin/fastq_dir_to_samplesheet.py
-    chmod u+x fastq_dir_to_samplesheet.py
-    mv fastq_dir_to_samplesheet.py "$OUTDIR/."
-fi
+SCRIPTDIR_PATH=$(cd "$(dirname "$0")"; echo "$PWD")
 
-#Build a sample sheet
-python "$OUTDIR"/fastq_dir_to_samplesheet.py \
+#Build a sample sheet with : https://raw.githubusercontent.com/nf-core/viralrecon/master/bin/fastq_dir_to_samplesheet.py 
+"./$SCRIPTDIR_PATH/fastq_dir_to_samplesheet.py" \
     --read1_extension $R1_EXT \
     --read2_extension $R2_EXT \
     "$DATADIR" "${OUTDIR}/${SAMPLE_SHEET}"
