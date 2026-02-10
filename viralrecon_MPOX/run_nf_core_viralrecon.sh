@@ -73,6 +73,7 @@ nextflow run nf-core/viralrecon -r 2.6.0 -profile docker \
     --platform illumina \
     --protocol metagenomic \
     --max_memory '64.GB' --max_cpus 10 \
+    --kraken2_variants_host_filter \
     $PARAMETERS
 
 ## NOTE : Pour plus d'information sur le genome de reference : https://github.com/nf-core/configs/blob/master/conf/pipeline/viralrecon/genomes.config
